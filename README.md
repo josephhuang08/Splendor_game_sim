@@ -24,7 +24,9 @@ python main.py
 ```
 
 ## Contributing
-We welcome contributions to this project. If you are interested in contributing, please follow these guidelines:
+This is a open project. We welcome anyone to work together and contributions to this project.  
+Feel free to provide your ideas, suggestions, feedback and improvements to this project.  
+If you are interested in contributing, please follow these guidelines:
 - Create a new branch for your changes
 - Test your code thoroughly before submitting a pull request
 - Use descriptive commit messages and follow good Git practices

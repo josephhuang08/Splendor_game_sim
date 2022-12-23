@@ -13,12 +13,12 @@ To get started with this project, you will need to have Python 3 installed on yo
 You can download Python from the [official website](https://www.python.org/downloads/).  
 Once you have Python installed, clone or dowload this repository and navigate to the project directory:
 
-Install the required dependencies:
+Install the required dependencies: **currently not needed**
 ```
 pip install -r requirements.txt
 ```
 
-You are now ready to run the game:
+You are now ready to run the game: **game not ready to play yet**
 ```
 python main.py
 ```
@@ -33,7 +33,8 @@ If you are interested in contributing, please follow these guidelines:
 
 
 ## Credits
-This project was inspired by the popular board game Splendor. It was developed by Joseph and [] as a way to practice development skills and improve teamwork.
+This project was inspired by the popular board game Splendor.  
+It was developed by Joseph and [] as a way to practice development skills and improve teamwork.
 
 
 ## Contact

@@ -6,7 +6,7 @@ Splendor is a popular board game that involves collecting and exchanging gems to
 - Play against another player or an AI opponent
 - Fully functional gameplay that replicates the original board game
 - Create interactive GUI
-- Have staticstic to analyze previous gameplay
+- Read history gameplay stats to analyze your gameplay
 
 ## Getting Started
 To get started with this project, you will need to have Python 3 installed on your machine.  

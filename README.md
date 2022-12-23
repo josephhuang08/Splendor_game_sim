@@ -21,7 +21,7 @@ pip install -r requirements.txt
 You are now ready to run the game:
 ```
 python main.py
-'''
+```
 
 ## Contributing
 We welcome contributions to this project. If you are interested in contributing, please follow these guidelines:

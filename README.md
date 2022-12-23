@@ -10,7 +10,7 @@ Splendor is a popular board game that involves collecting and exchanging gems to
 
 ## Getting Started
 To get started with this project, you will need to have Python 3 installed on your machine.  
-You can download Python from the [official website](https://www.python.org/downloads/).
+You can download Python from the [official website](https://www.python.org/downloads/).  
 Once you have Python installed, clone or dowload this repository and navigate to the project directory:
 
 Install the required dependencies:

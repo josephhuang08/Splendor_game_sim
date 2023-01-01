@@ -2,8 +2,8 @@ import unittest
 
 from Board import Board
 from Player import Player
-from Card import Card
-from Noble import Noble
+from Card import Card, CardList
+from Noble import Noble, NobleList
 from Game import Game
 
 class TestPlayer(unittest.TestCase):
@@ -44,12 +44,69 @@ class TestPlayer(unittest.TestCase):
         # Test reserving a card and adding it to the player's reserved card list
         self.player.res_card(self.cards[0])
         self.assertEqual(self.player.get_res_cards(), [self.cards[0]])
-        self.assertEqual(self.player.get_res_card_count(), 1)
 
     def test_acquire_noble(self):
         # Test player aquiring a noble
         self.player.acquire_noble(self.noble[0])
         self.assertEqual(self.player.get_points(), 3)
 
-if __name__ == '__main__':
+class TestCard(unittest.TestCase):
+    def setUp(self):
+        # Set up a list of cards to use for testing
+        self.card_list = CardList()
+
+    def test_init(self):
+        # test if the total amount of cards are correct
+        self.assertEqual(len(self.card_list.level1), 40)
+        self.assertEqual(len(self.card_list.level2), 30)
+        self.assertEqual(len(self.card_list.level3), 20)
+
+    def test_new_card(self):
+        # Test new_card. assertFalse becase new_card will be removed from the deck thus not in the card_list
+        self.assertFalse(self.card_list.new_card(1) in self.card_list.level1)
+        self.assertFalse(self.card_list.new_card(2) in self.card_list.level2)
+        self.assertFalse(self.card_list.new_card(3) in self.card_list.level3)
+
+        # Test new_card with invalid level
+        self.assertIsNone(self.card_list.new_card(4))
+
+        # Test new_card with valid level but empty list
+        self.card_list.level1 = []
+        self.assertIsNone(self.card_list.new_card(1))
+
+
+class TestNobleList(unittest.TestCase):
+    def setUp(self):
+        # Create a test Noble object and a NobleList object
+        self.noble_list = NobleList()
+
+    def test_new_nobles(self):
+        # Test new_nobles with valid input. Check if each noble is different
+        nobles = self.noble_list.new_nobles(5)
+        self.assertEqual(len(nobles), 5)
+        self.assertTrue(all(isinstance(noble, Noble) for noble in nobles))
+        for i in range(len(nobles)):
+            for j in range(i + 1, len(nobles)):
+                self.assertNotEqual(nobles[i], nobles[j])
+
+
+def test_player():
+    test = unittest.TestLoader().loadTestsFromTestCase(TestPlayer)
+    unittest.TextTestRunner().run(test)
+
+def test_card():
+    test = unittest.TestLoader().loadTestsFromTestCase(TestCard)
+    unittest.TextTestRunner().run(test)
+
+def test_noble():
+    test = unittest.TestLoader().loadTestsFromTestCase(TestNobleList)
+    unittest.TextTestRunner().run(test)
+
+def test_all():
     unittest.main()
+
+if __name__ == '__main__':
+    test_player()
+    #test_card()
+    #test_noble()
+    #test_all()

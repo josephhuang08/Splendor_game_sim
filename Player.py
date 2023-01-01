@@ -5,11 +5,8 @@ class Player:
         self.gem_limit = 10
         self.points = 0
         self.pur_cards_type = {'blue': 0, 'green': 0, 'black': 0, 'red': 0, 'white': 0}
-        self.pur_cards_count = 0
         self.res_cards = []
-        self.res_card_count = 0
         self.nobles = []
-        
 
     def get_name(self):
         return self.name
@@ -26,14 +23,13 @@ class Player:
     def get_res_cards(self):
         return self.res_cards
 
-    def get_res_card_count(self):
-        return self.res_card_count
-
     def get_nobles(self):
         return self.nobles
 
     def add_gem(self, new_gems):
+        # add gems to player's hand and check if player have more than 10 gems
         def switch(x):
+            # choose which gem to discard
             def dec_gem(gem_type):
                 if self.gems[gem_type] > 0:
                     self.gems[gem_type] -= 1
@@ -50,20 +46,21 @@ class Player:
                 5: lambda: dec_gem('white')
             }
             return switcher.get(x, "invalid input")()
+        
+        # add new gems to players hand
+        for gem_type, amount in new_gems.items():
+            self.gems[gem_type] += amount
 
-        total_gems = sum(self.gems.values()) + sum(new_gems.values())
-        while total_gems > self.gem_limit:
+        # discard gems until gems in hand is equal to gem limit
+        while sum(self.gems.values()) > self.gem_limit:
+            print(f"total gems: {sum(self.gems.values())}")
             print("Which gem would you like to discard?")
             print(f"1 - blue({self.gems['blue']})")
             print(f"2 - green({self.gems['green']})")
             print(f"3 - black({self.gems['black']})")
             print(f"4 - red({self.gems['red']})")
             print(f"5 - white({self.gems['white']})")
-            result = switch(int(input()))
-            total_gems -= 1 if result == 'discarded a gem' else 0
-
-        for gem_type, amount in new_gems.items():
-            self.gems[gem_type] += amount
+            switch(int(input()))
 
     def buy_card(self, card) :
         #TODO Check if player can afford the card
@@ -71,12 +68,10 @@ class Player:
             amount -= self.pur_cards_type[gem_type]
             self.gems[gem_type] -= amount
         self.pur_cards_type[card.get_gem_type()] += 1
-        self.pur_cards_count += 1
         self.points += card.get_points()
         
     def res_card(self, card):
         self.res_cards.append(card)
-        self.res_card_count += 1
     
     def acquire_noble(self, noble):
         self.nobles.append(noble)

@@ -1,8 +1,9 @@
+
+
 class Board:
-    def __init__(self, nobles, field_cards, deck_cards, gems):
+    def __init__(self, nobles, cards, gems):
         self.nobles = nobles
-        self.field_cards = field_cards
-        self.deck_cards = deck_cards
+        self.cards = cards
         self.gems = gems
 
     def display(self):

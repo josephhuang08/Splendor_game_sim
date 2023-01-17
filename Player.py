@@ -80,15 +80,24 @@ class Player:
         return True
 
     def buy_card(self, card):
+        gems_returned = {}
         for gem_type, amount in card.cost.items():
-            amount -= self.pur_cards_type[gem_type]
-            self.gems[gem_type] -= amount
+            # calculate how many normal gems used.
+            amount -= self.pur_cards_type[gem_type] # substitute the cost with already purchased cards 
+            self.gems[gem_type] -= amount # self.gems[gem_type] will be a negative number when needing gold gems
+            gems_returned.update({gem_type: amount})
             if self.gems[gem_type] < 0:
-                self.gems['gold'] += self.gems[gem_type]
+                # when not enough normal gems, calculate how many gold gems used
+                self.gems['gold'] += self.gems[gem_type] # the negative amount of gems equals the amount of gold gems needed
+                # update the correct gems used to purchase this card
+                gems_returned[gem_type] += self.gems[gem_type]
+                gems_returned.update({'gold': abs(self.gems[gem_type])})
                 self.gems[gem_type] = 0
+
     
         self.pur_cards_type[card.get_gem_type()] += 1
         self.points += card.get_points()
+        return gems_returned
         
     def res_card(self, card, get_gold):
         if get_gold:

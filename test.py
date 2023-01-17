@@ -41,10 +41,10 @@ class TestPlayer(unittest.TestCase):
     def test_pur_card(self):
         self.player.add_gem({'green': 1, 'blue': 1, 'red': 3, 'white': 1})
         # Test a successful purchase when the player has enough gems
-        self.player.buy_card(self.cards[0]) # buys first card (type: black)
+        self.assertEqual(self.player.buy_card(self.cards[0]), {'blue': 1, 'green': 1})# buys first card (type: black)
         self.assertEqual(self.player.get_gems(), {'blue': 0, 'green': 0, 'black': 0, 'red': 3, 'white': 1, 'gold': 1})
         # Test when player must use gold token to buy a card
-        self.player.buy_card(self.cards[1]) # buys second card (type: blue)
+        self.assertEqual(self.player.buy_card(self.cards[1]), {'red': 3, 'gold': 1, 'green': 0}) # buys second card (type: blue)
         self.assertEqual(self.player.get_gems(), {'blue': 0, 'green': 0, 'black': 0, 'red': 0, 'white': 1, 'gold': 0}) 
         self.assertEqual(self.player.get_pur_cards_type(), {'blue': 1, 'green': 0, 'black': 1, 'red': 0, 'white': 0})
         self.assertEqual(self.player.get_points(), 1)
@@ -116,7 +116,7 @@ def test_all():
     unittest.main()
 
 if __name__ == '__main__':
-    #test_player()
+    test_player()
     #test_card()
     #test_noble()
-    test_all()
+    #test_all()

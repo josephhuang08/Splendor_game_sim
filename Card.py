@@ -31,9 +31,9 @@ class CardList:
             next(reader) 
             # Iterate through the rows of the file. Each row contains Color;green;red;blue;white;black;WP;Level
             for row in reader:
-                # convert the list of cost of gems into int
-                temp = [row[1], row[2], row[3], row[4], row[5]]
-                cost = [int(x) if x else 0 for x in temp]
+                # get the cost of cards into dict and then convert the values into dict
+                cost = {'red': row[2], 'green': row[1], 'blue': row[3], 'black': row[5], 'white': row[4]}
+                cost = {key: int(value) if value else 0 for key, value in cost.items()}
                 # Create a Card object and set its attributes
                 new_card = Card(row[0], cost, int(row[6]), int(row[7]))
                 if new_card.get_level() == 1 :
@@ -46,7 +46,6 @@ class CardList:
         random.shuffle(self.level1)
         random.shuffle(self.level2)
         random.shuffle(self.level3)
-
 
     def new_card(self, level):
         # returns a card to the board and removes it from the deck
